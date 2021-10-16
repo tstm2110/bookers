@@ -16,15 +16,25 @@ class BooksController < ApplicationController
   end
 
   def edit
-      @book = Book.find(params[:id])
-  end
+   
+    @books = Book.all
+    if  @book = Book.find(params[:id])
+      flash[:notice] = "Book was successfully created."
+  else
+    @book = Book.new(book_params)
+      render "show"
+    end
+    end
    def update
+    
        @books = Book.all
     book = Book.find(params[:id])
     if  book.update(book_params)
+       flash[:notice] = "Book was successfully created."
     redirect_to book_path(book)
     else
-      render "index"
+         @book = Book.new(book_params)
+      render "show"
     end
   end
  
@@ -35,7 +45,8 @@ class BooksController < ApplicationController
     # ２. データをデータベースに保存するためのsaveメソッド実行
     if  @book.save
     # ３. トップ画面へリダイレクト
-      redirect_to book_path(@book.id), success: '登録ができました'
+     flash[:notice] = "Book was successfully created."
+      redirect_to book_path(@book.id)
       # 詳細画面へリダイレクト
     else
       render "index"

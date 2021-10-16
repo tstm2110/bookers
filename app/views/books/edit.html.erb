@@ -1,4 +1,8 @@
 <h1>Editing Book</h1>
+
+<% if flash[:notice] %>
+  <p><%= flash[:notice] %></p>
+<% end %>
 <!-- form_with部分 -->
 <%= form_with model:@book, local: true do |f| %>
   <h4>Title</h4>
