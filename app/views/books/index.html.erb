@@ -1,0 +1,48 @@
+<h1>Books</h1>
+<div class="overflow-wrap">
+     <div class=break-word>
+<div class="left" >
+<table>
+  <tr>
+  <th>Title</th>  <th>Body</th></tr>
+<% @books.each do |book| %>
+     <tr> <td>
+   <%= book.title%>
+   </td>
+   <td>
+ <%= book.body %>
+  </td><th>
+    <span>
+  <%= link_to "Show", book_path(book) %>
+  </span>
+   <span>
+  <%= link_to "Edit", edit_book_path(book) %>
+  </span>
+   <span>
+  <%= link_to "Destroy", book_path(book), method: :delete %>
+  </span>
+   </th> </tr>
+<% end %>
+ </table>
+ </div>  
+ </div>
+  </div>
+<h1>New book </h1>
+<!-- form_with部分 -->
+<% if @book.errors.any? %>
+  <%= @book.errors.count %>errors prohibited this book from being saved
+  <% @book.errors.full_messages.each do |message| %>
+    <%= message %>
+     else
+    <%= notice "Book was successfully created."%>
+    end
+
+  <% end %>
+<% end %>
+<%= form_with model: @book, url:'/books', local:true do |f| %>
+  <h4>Title</h4>
+  <%= f.text_field :title %>
+  <h4>Body</h4>
+  <%= f.text_area :body %>
+  <%= f.submit 'Create Book' %>
+<% end %>

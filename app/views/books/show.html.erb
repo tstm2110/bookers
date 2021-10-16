@@ -1,0 +1,20 @@
+<% if @book.errors.any? %>
+  <%= @book.errors.count %>errors prohibited this book from being saved:
+  <% @book.errors.full_messages.each do |message| %>
+    <%= message %>
+    else
+    <%= notice "Book was successfully created."%>
+    end
+  <% end %>
+<% end %>
+<!-- form_with部分 -->
+<%= form_with model:@book, local: true do |f| %>
+  <h4>Title:  <%= @book.title %></h4>
+ 
+  <h4>Body:  <%= @book.body %></h4>
+ 
+
+  <%= link_to "Edit", edit_book_path(@book) %>
+  <%= link_to "Back", books_path %>
+
+<% end %>
